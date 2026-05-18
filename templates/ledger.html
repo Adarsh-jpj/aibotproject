@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}ChainTransit | Ledger{% endblock %}
+{% block content %}
+<section class="section-title">
+    <h3>Blockchain Ledger</h3>
+    <p>Each ticket confirmation creates a mined block with the booking payload and previous hash link.</p>
+</section>
+
+<div class="ledger-layout">
+    <div class="card-panel">
+        <h3>Recent Bookings</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th><th>Mode</th><th>Passenger</th><th>Route</th><th>Seat</th><th>Fare</th><th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for b in bookings %}
+                    <tr>
+                        <td>{{ b['id'] }}</td>
+                        <td>{{ b['service_type'] }}</td>
+                        <td>{{ b['passenger_name'] }}</td>
+                        <td>{{ b['source'] }} → {{ b['destination'] }}</td>
+                        <td>{{ b['seat_no'] }}</td>
+                        <td>₹ {{ '%.2f'|format(b['amount']) }}</td>
+                        <td>{{ b['status'] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="7">No bookings yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="block-list">
+        {% for block in blocks|reverse %}
+        <article class="block-card">
+            <div class="block-head">
+                <h4>Block #{{ block.index }}</h4>
+                <span class="mini-badge">{{ block.transaction_type }}</span>
+            </div>
+            <p><strong>Timestamp:</strong> {{ block.timestamp }}</p>
+            <p><strong>Hash:</strong> <span class="hash-line">{{ block.hash }}</span></p>
+            <p><strong>Previous:</strong> <span class="hash-line">{{ block.previous_hash }}</span></p>
+            <details>
+                <summary>Transaction Data</summary>
+                <pre>{{ block.data | tojson(indent=2) }}</pre>
+            </details>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

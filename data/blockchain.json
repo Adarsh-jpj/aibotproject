@@ -1,0 +1,13 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-03-27T20:00:54.361726",
+    "transaction_type": "GENESIS",
+    "data": {
+      "message": "Genesis block for booking ledger"
+    },
+    "previous_hash": "0",
+    "nonce": 4137,
+    "hash": "0003cf5e9428aa565f2433d37d78f5168694542b2b61f817bfe3a145b0379c8d"
+  }
+]

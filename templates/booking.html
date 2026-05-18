@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}ChainTransit | Booking{% endblock %}
+{% block content %}
+<section class="booking-layout">
+    <div class="booking-info card-panel">
+        <div class="service-head">
+            <span class="mode-tag {{ schedule['service_type']|lower }}">{{ schedule['service_type'] }}</span>
+            <span class="vehicle">{{ schedule['vehicle_no'] }}</span>
+        </div>
+        <h3>{{ schedule['route_name'] }}</h3>
+        <p class="route"><strong>{{ schedule['source'] }}</strong> → <strong>{{ schedule['destination'] }}</strong></p>
+        <div class="meta-grid">
+            <div><label>Departure</label><span>{{ schedule['departure_time'] }}</span></div>
+            <div><label>Arrival</label><span>{{ schedule['arrival_time'] }}</span></div>
+            <div><label>Fare</label><span>₹ {{ '%.2f'|format(schedule['fare']) }}</span></div>
+            <div><label>Available Model</label><span>Smart Seat Layout</span></div>
+        </div>
+
+        <form id="booking-form" class="booking-form" data-schedule-id="{{ schedule['id'] }}">
+            <div class="input-grid">
+                <div>
+                    <label>Passenger Name</label>
+                    <input type="text" name="passenger_name" placeholder="Enter full name" required />
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" name="passenger_email" placeholder="Enter email" required />
+                </div>
+                <div>
+                    <label>Phone</label>
+                    <input type="text" name="passenger_phone" placeholder="Enter mobile number" required />
+                </div>
+                <div>
+                    <label>Seat Number</label>
+                    <input type="text" id="seat_no" name="seat_no" placeholder="Select a seat" readonly required />
+                </div>
+            </div>
+            <button class="primary-btn full" type="submit">Confirm Booking on Blockchain</button>
+            <p id="form-message" class="form-message"></p>
+        </form>
+    </div>
+
+    <div class="seat-panel card-panel">
+        <div class="seat-title-row">
+            <div>
+                <h3>{{ schedule['service_type'] }} Seat Layout</h3>
+                <p>Click an available seat to assign it to the passenger.</p>
+            </div>
+            <div class="legend">
+                <span><i class="legend-box available"></i>Available</span>
+                <span><i class="legend-box selected"></i>Selected</span>
+                <span><i class="legend-box booked"></i>Booked</span>
+            </div>
+        </div>
+        <div class="vehicle-shell {{ schedule['service_type']|lower }}">
+            {% if schedule['service_type'] == 'BUS' %}
+            <div class="driver-box">Driver</div>
+            {% else %}
+            <div class="driver-box">Coach Entry</div>
+            {% endif %}
+            <div class="seat-map {{ schedule['service_type']|lower }}-map">
+                {% for seat in seat_layout %}
+                <button
+                    type="button"
+                    class="seat {% if seat['seat_no'] in booked_seats %}booked{% endif %}"
+                    data-seat="{{ seat['seat_no'] }}"
+                    {% if seat['seat_no'] in booked_seats %}disabled{% endif %}
+                >{{ seat['seat_no'] }}</button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

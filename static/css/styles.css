@@ -1,0 +1,190 @@
+:root {
+  --bg-1: #081225;
+  --bg-2: #14294b;
+  --glass: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.14);
+  --text: #edf4ff;
+  --muted: #b7c6df;
+  --primary: #5eead4;
+  --accent: #8b5cf6;
+  --danger: #ff6b6b;
+  --warning: #fbbf24;
+  --success: #22c55e;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, Segoe UI, Arial, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(94, 234, 212, 0.22), transparent 25%),
+    radial-gradient(circle at top right, rgba(139, 92, 246, 0.22), transparent 28%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  position: relative;
+}
+.overlay {
+  position: fixed; inset: 0;
+  background: url('https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1400&q=60') center/cover;
+  opacity: 0.12;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.topbar, .container { position: relative; z-index: 1; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 40px; border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  background: rgba(5, 12, 24, 0.45);
+}
+.brand-wrap { display: flex; align-items: center; gap: 16px; }
+.brand-mark {
+  width: 52px; height: 52px; border-radius: 16px;
+  display: grid; place-items: center; font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--accent)); color: #06131c;
+}
+.topbar h1 { margin: 0; font-size: 1.3rem; }
+.topbar p { margin: 4px 0 0; color: var(--muted); font-size: 0.9rem; }
+.topbar nav a {
+  color: var(--text); text-decoration: none; margin-left: 18px; font-weight: 600;
+}
+.container { max-width: 1320px; margin: 0 auto; padding: 28px; }
+.hero-card, .card-panel, .service-card, .ticket-card, .block-card {
+  background: var(--glass); border: 1px solid var(--border); border-radius: 24px;
+  backdrop-filter: blur(16px); box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+}
+.hero-card {
+  display: flex; justify-content: space-between; gap: 20px; padding: 28px; margin-bottom: 24px;
+}
+.hero-card.slim { align-items: center; }
+.main-hero { align-items: center; }
+.badge, .mini-badge {
+  display: inline-flex; padding: 8px 12px; border-radius: 999px; font-weight: 700;
+  background: rgba(94, 234, 212, 0.14); color: var(--primary);
+  border: 1px solid rgba(94, 234, 212, 0.22);
+}
+.mini-badge { padding: 4px 10px; font-size: 0.8rem; }
+.hero-card h2, .section-title h3, .service-card h4, .card-panel h3, .ticket-card h3 { margin: 12px 0; }
+.hero-card p, .section-title p, .route, .service-card p, .card-panel p { color: var(--muted); }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; min-width: 340px; }
+.stat-box {
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 20px;
+  padding: 18px; text-align: center;
+}
+.stat-box strong { display: block; font-size: 1.35rem; margin-bottom: 4px; }
+.chain-status {
+  padding: 14px 18px; border-radius: 18px; height: fit-content; font-weight: 700;
+  display: flex; align-items: center; gap: 10px;
+}
+.chain-status.valid { background: rgba(34, 197, 94, 0.12); color: #b6ffca; }
+.chain-status.invalid { background: rgba(255, 107, 107, 0.12); color: #ffd0d0; }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+.section-title { margin: 28px 0 20px; }
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px;
+}
+.service-card { padding: 22px; }
+.service-head, .seat-title-row, .block-head, .ticket-top {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.mode-tag {
+  display: inline-flex; padding: 7px 10px; border-radius: 999px; font-weight: 700; font-size: .85rem;
+}
+.mode-tag.bus { background: rgba(251, 191, 36, 0.16); color: #ffe08c; }
+.mode-tag.rail { background: rgba(96, 165, 250, 0.16); color: #cae1ff; }
+.vehicle { color: var(--muted); font-size: .92rem; }
+.meta-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 16px 0 20px;
+}
+.meta-grid div, .ticket-grid div {
+  padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+label { display: block; color: var(--muted); font-size: .82rem; margin-bottom: 6px; }
+.primary-btn {
+  display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  padding: 13px 18px; border: none; border-radius: 16px; cursor: pointer;
+  text-decoration: none; font-weight: 800; color: #071119;
+  background: linear-gradient(135deg, var(--primary), #93c5fd);
+}
+.primary-btn.full, .print-btn { width: 100%; }
+.booking-layout, .ledger-layout {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px;
+}
+.card-panel { padding: 24px; }
+.booking-form { margin-top: 22px; }
+.input-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 18px;
+}
+input {
+  width: 100%; padding: 14px 14px; border-radius: 14px; border: 1px solid var(--border);
+  background: rgba(7, 15, 30, 0.75); color: var(--text);
+}
+.form-message { min-height: 24px; margin-top: 14px; color: var(--muted); }
+.form-message.success { color: #b7ffd1; }
+.form-message.error { color: #ffb8b8; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: .9rem; }
+.legend-box {
+  display: inline-block; width: 16px; height: 16px; border-radius: 5px; margin-right: 6px; vertical-align: middle;
+}
+.legend-box.available { background: rgba(255,255,255,.14); }
+.legend-box.selected { background: linear-gradient(135deg, var(--primary), #67e8f9); }
+.legend-box.booked { background: rgba(255, 107, 107, .7); }
+.vehicle-shell {
+  margin-top: 20px; background: rgba(7, 15, 30, 0.8); border-radius: 28px; padding: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.driver-box {
+  width: 140px; text-align: center; margin-left: auto; margin-bottom: 24px;
+  padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,0.06); color: var(--muted);
+}
+.seat-map {
+  display: grid; gap: 12px;
+}
+.bus-map { grid-template-columns: repeat(4, 1fr); }
+.rail-map { grid-template-columns: repeat(6, 1fr); }
+.seat {
+  padding: 14px 8px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08); color: var(--text); cursor: pointer; font-weight: 700;
+}
+.bus-map .seat:nth-child(4n+2) { margin-right: 18px; }
+.rail-map .seat:nth-child(6n+3) { margin-right: 16px; }
+.seat.selected { background: linear-gradient(135deg, var(--primary), #67e8f9); color: #051018; }
+.seat.booked { background: rgba(255, 107, 107, 0.58); cursor: not-allowed; }
+.ticket-shell { display: flex; justify-content: center; }
+.ticket-card { width: min(900px, 100%); padding: 28px; }
+.ticket-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 24px 0;
+}
+.ticket-grid .wide { grid-column: 1 / -1; }
+.hash-line {
+  display: inline-block; word-break: break-all; font-family: Consolas, monospace; font-size: .83rem;
+  color: #d6edff;
+}
+.qr-block { text-align: center; }
+.fake-qr {
+  width: 84px; height: 84px; margin-left: auto; border-radius: 8px;
+  background: conic-gradient(from 90deg, #fff 0 25%, #000 0 50%, #fff 0 75%, #000 0 100%);
+  outline: 6px solid white;
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; }
+.block-list { display: grid; gap: 16px; }
+.block-card { padding: 20px; }
+pre {
+  white-space: pre-wrap; word-break: break-word; background: rgba(7,15,30,0.75);
+  padding: 12px; border-radius: 14px; color: #d7e9ff;
+}
+@media (max-width: 980px) {
+  .booking-layout, .ledger-layout, .hero-card, .topbar { grid-template-columns: 1fr; display: grid; }
+  .topbar { gap: 16px; }
+  .hero-stats, .input-grid, .ticket-grid, .meta-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  .topbar, .hero-card.slim, .print-btn { display: none !important; }
+  body { background: white; color: black; }
+  .ticket-card { box-shadow: none; border: 1px solid #ddd; background: white; }
+  .ticket-grid div { background: white; }
+}

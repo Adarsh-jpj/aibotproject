@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}ChainTransit | Ticket{% endblock %}
+{% block content %}
+<section class="ticket-shell">
+    <article class="ticket-card">
+        <div class="ticket-top">
+            <div>
+                <span class="badge">e-Ticket</span>
+                <h3>{{ booking['route_name'] }}</h3>
+                <p>{{ booking['service_type'] }} • {{ booking['vehicle_no'] }}</p>
+            </div>
+            <div class="qr-block">
+                <div class="fake-qr"></div>
+                <small>Verified Booking</small>
+            </div>
+        </div>
+
+        <div class="ticket-grid">
+            <div><label>Passenger</label><span>{{ booking['passenger_name'] }}</span></div>
+            <div><label>Email</label><span>{{ booking['passenger_email'] }}</span></div>
+            <div><label>Phone</label><span>{{ booking['passenger_phone'] }}</span></div>
+            <div><label>Seat</label><span>{{ booking['seat_no'] }}</span></div>
+            <div><label>From</label><span>{{ booking['source'] }}</span></div>
+            <div><label>To</label><span>{{ booking['destination'] }}</span></div>
+            <div><label>Departure</label><span>{{ booking['departure_time'] }}</span></div>
+            <div><label>Arrival</label><span>{{ booking['arrival_time'] }}</span></div>
+            <div><label>Fare</label><span>₹ {{ '%.2f'|format(booking['amount']) }}</span></div>
+            <div><label>Status</label><span>{{ booking['status'] }}</span></div>
+            <div class="wide"><label>Blockchain Hash</label><span class="hash-line">{{ booking['block_hash'] }}</span></div>
+        </div>
+        <button class="primary-btn print-btn" onclick="window.print()">Print Ticket</button>
+    </article>
+</section>
+{% endblock %}

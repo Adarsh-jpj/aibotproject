@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}ChainTransit | Schedules{% endblock %}
+{% block content %}
+<section class="hero-card main-hero">
+    <div>
+        <span class="badge">Professional Booking Dashboard</span>
+        <h2>Reserve premium bus and rail seats with blockchain security</h2>
+        <p>Choose a live schedule, inspect the seat map, and generate a digitally traceable ticket.</p>
+    </div>
+    <div class="hero-stats">
+        <div class="stat-box"><strong>{{ schedules|length }}</strong><span>Schedules</span></div>
+        <div class="stat-box"><strong>2</strong><span>Transport Modes</span></div>
+        <div class="stat-box"><strong>SHA-256</strong><span>Ledger Hashing</span></div>
+    </div>
+</section>
+
+<section class="section-title">
+    <h3>Available Services</h3>
+    <p>Designed for academic demonstration, final year projects, and portfolio deployment.</p>
+</section>
+
+<div class="card-grid">
+    {% for s in schedules %}
+    <article class="service-card">
+        <div class="service-head">
+            <span class="mode-tag {{ s['service_type']|lower }}">{{ s['service_type'] }}</span>
+            <span class="vehicle">{{ s['vehicle_no'] }}</span>
+        </div>
+        <h4>{{ s['route_name'] }}</h4>
+        <p class="route"><strong>{{ s['source'] }}</strong> → <strong>{{ s['destination'] }}</strong></p>
+        <div class="meta-grid">
+            <div><label>Departure</label><span>{{ s['departure_time'] }}</span></div>
+            <div><label>Arrival</label><span>{{ s['arrival_time'] }}</span></div>
+            <div><label>Fare</label><span>₹ {{ '%.2f'|format(s['fare']) }}</span></div>
+            <div><label>Security</label><span>Blockchain Logged</span></div>
+        </div>
+        <a class="primary-btn" href="{{ url_for('schedule_detail', schedule_id=s['id']) }}">Open Seat Layout</a>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

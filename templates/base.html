@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}ChainTransit{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+    <script defer src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body>
+    <div class="overlay"></div>
+    <header class="topbar">
+        <div class="brand-wrap">
+            <div class="brand-mark">CT</div>
+            <div>
+                <h1>ChainTransit</h1>
+                <p>Blockchain-enabled Bus & Rail Ticket Booking</p>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('ledger') }}">Ledger</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero-card slim">
+            <div>
+                <span class="badge">Secure Ticketing</span>
+                <h2>Immutable booking trail with premium seat layout</h2>
+                <p>Every confirmed seat is recorded as a blockchain transaction with hash validation.</p>
+            </div>
+            <div class="chain-status {{ 'valid' if chain_valid else 'invalid' }}">
+                <span class="status-dot"></span>
+                Blockchain {{ 'Verified' if chain_valid else 'Invalid' }}
+            </div>
+        </section>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
